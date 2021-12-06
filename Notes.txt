@@ -1,0 +1,56 @@
+1. webHooks (Auth, Registration, Event Trigger, Sample Java app)
+
+2.Elasticsearch Scaling, Log templating structure, Log modeling, Visualization and dashboards, Alerts- only through theoretical has to be covered.
+3. Azure Load Balancer Theory.
+
+ http://f797-111-125-218-26.ngrok.io
+ 
+ Links to Download Elastic Products:
+https://www.elastic.co/downloads/elasticsearch
+https://www.elastic.co/downloads/logstash
+https://www.elastic.co/downloads/kibana
+
+
+
+Explantion:
+We are going to import our spring boot application logs to logstash then we will send it to elasticsearch and then we will send it to Kibana
+
+Steps:
+1) Run the Elasticsearch.bat
+Then check if the elasticsearch is up by hitting the URL : http://localhost:9200/
+
+2) Then modify the config/kibana.yaml file and uncomment elasticsearch.hosts property
+now run the kibana.bat
+and Then check if the Kibana is up by hitting the URL : http://localhost:5601/
+3) Now run your provided spring boot application and verify it is printing logs in configured position
+4) Now Create logstash-simple.conf file and copy paste it in logstash/bin folder
+refer : https://www.elastic.co/guide/en/logstash/current/configuration.html
+Eefer the provided file:
+
+Then use the below commmands in logstash/bin folder
+logstash -f logstash-simple.conf
+
+Then check if the logstash is up by hitting your web app URL : http://localhost:9898/getUser/3
+
+Now verify by checking the logs in running logstash CMD
+
+5) Now view the indicies, by executing the below URL:
+http://localhost:9200/_cat/indices
+
+Now copy "logstash-2021.12.06-000001"
+and create a URL like : http://localhost:9200/logstash-2021.12.06-000001/_search
+
+
+6) Now goto Kibana Dashboard:
+http://localhost:5601/app/home#/
+
+then goto then click the hamburger menu icon -> management -> Stack Management -> Kibana(Index Patterns) -> Creae Index Patterns -> 
+In name Enter logstash-*
+In timestamp field: I dont want to use the time filter then click on create index pattern
+
+7) Now view logs on Kibana -> Click the Hamburger Icon -> Dicover
+
+
+
+
+
